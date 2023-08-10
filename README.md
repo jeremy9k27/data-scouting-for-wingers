@@ -17,7 +17,7 @@ Public Data from FBRef was used for this project. To find what statistics to foc
 The relevant FBRef pages of the 2022-23 season in the Big 5 football leagues (English Premier League, German Bundesliga, French Ligue 1, Italian Serie A, and Spanish La Liga) were then downloaded as CSVs. There were 3 needed pages for each league: Standard Stats, Goal and Shot Creation, and Possession. For each league, the 3 CSVs were concatenating by player name, resulting in 5 CSVs for each league. They were each uploaded into Google Colab and then concatenated into 1 big dataframe (df).
 
 
-**Data Wrangling?**
+**Data Wrangling**
 
 The type of some of the data was string rather than integers so they needed to be converted. There were alsomany instances of players having empty stats due to them playing very few minutes. However, this was not a problem because the minimum minutes threshold that was later applied filtered out all such players. 
 
@@ -25,7 +25,7 @@ The type of some of the data was string rather than integers so they needed to b
 
 A second dataframe (df2) was then created to contain only the relevant data from df1. As there is no "winger" position on FBRef, it contained all attackers (players listed as FW, FW-MF, or MF-FW). df2 also included the 4 aftormentioned stats as well as other key information like age, minutes, and npxG+xAG p90. npxG+xA per 90 was used as an additional filter to rule out players who have good skills, but lack end-product contribution. 5 new columns were also added to df2, them being the percentile ranks of each players 4 stats and npxG+xAG p90 within this group of attackers.
 
-The final dataframe (df3) was made by applying filters. Only players above the 60th percentile in in each of the 5 stats and were 25 years old or younger were included. df3 was then ranked in descending order by their average percentile of the 5 stats to obtain a rough ranking of the final players.
+The final dataframe (df3) was made by applying filters. Only players who played over 10 90s in the 2022-23 domestic season, were above the 60th percentile in each of the 5 stats, and were 25 years old or younger were included. df3 was then ranked in descending order by their average percentile of the 5 stats to obtain a rough ranking of the final players.
 
 **Results**
 
