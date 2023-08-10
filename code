@@ -36,7 +36,7 @@ df["Progressive Passes Recieved p90"] = pd.to_numeric(df["PrgR"]) / df["90s"]
 #df2 is a condensed version of df that has onl the needed data. It contains all players who pass the minutes threshold and only their relevant stats
 df2 = df[(df.Pos == 'FW') | (df.Pos == 'FW,MF') | (df.Pos == 'MF,FW')]
 df2 = df2[['Player', 'Nation', 'Pos', 'Squad', 'Age', '90s', 'npxG+xAG p90', 'Shot Creating Actions p90', 'Carries p90', 'Gls', 'Take Ons p90', 'Progressive Passes Recieved p90']]
-df2 = df2[df2['90s'] > 10]
+
 
 
 #create columns that are percentile ranks of desired stats
@@ -50,6 +50,6 @@ df2["percentile_grade"] = df2[['sca_ptile', 'carries_ptile', 'take_ons_ptile', '
 
 
 #apply filters to find final group of players
-df3 = df2[(df2['Age'] <= 25) & (df2['npxG+xAG_ptile'] > 0.6) & (df2['sca_ptile'] > 0.6) & (df2['sca_ptile'] > 0.6) & (df2['carries_ptile'] > 0.6) & (df2['take_ons_ptile'] > 0.6) & (df2['PrgR_ptile'] > 0.6)]
+df3 = df2[(df2['90s'] > 10) & (df2['Age'] <= 25) & (df2['npxG+xAG_ptile'] > 0.6) & (df2['sca_ptile'] > 0.6) & (df2['sca_ptile'] > 0.6) & (df2['carries_ptile'] > 0.6) & (df2['take_ons_ptile'] > 0.6) & (df2['PrgR_ptile'] > 0.6)]
 
 df3 = df3.sort_values(by='percentile_grade', ascending=False)
