@@ -1,2 +1,65 @@
-code
+import pandas as pd
+from google.colab import files
 
+
+'''
+#upload datasets
+for i in range(5):
+  uploaded = files.upload()
+
+
+#(or just use upload directly through colab's file upload on left bar)
+'''
+
+
+df_epl = pd.read_csv("epl stats.csv")
+df_serie_a = pd.read_csv("serie a stats.csv")
+df_la_liga = pd.read_csv("la liga stats.csv")
+df_bundesliga = pd.read_csv("bundesliga stats.csv")
+df_ligue_1 = pd.read_csv("ligue 1 stats.csv")
+
+
+pd.set_option('display.max_rows', None)
+pd.set_option('display.max_columns', None)
+
+df = pd.concat([df_epl, df_serie_a, df_la_liga, df_bundesliga, df_ligue_1])
+
+pd.to_numeric(df['90s'])
+df["npxG+xAG p90"] = pd.to_numeric(df["npxG+xAG.1"])
+df["Shot Creating Actions p90"] = pd.to_numeric(df["SCA90"])
+df["Take Ons p90"] = pd.to_numeric(df["Succ"]) / df["90s"]
+df["Carries p90"] = pd.to_numeric(df["PrgC"]) / df["90s"]
+df["Progressive Passes Recieved p90"] = pd.to_numeric(df["PrgR"]) / df["90s"]
+
+
+
+#df2 is a condensed version of df that has onl the needed data. It contains all players who pass the minutes threshold and only their relevant stats
+df2 = df[(df.Pos == 'FW') | (df.Pos == 'FW,MF') | (df.Pos == 'MF,FW')]
+df2 = df2[['Player', 'Nation', 'Pos', 'Squad', 'Age', '90s', 'npxG+xAG p90', 'Shot Creating Actions p90', 'Carries p90', 'Gls', 'Take Ons p90', 'Progressive Passes Recieved p90']]
+df2 = df2[df2['90s'] > 10]
+
+
+#create columns that are percentile ranks of desired stats
+df2["sca_ptile"] = df2['Shot Creating Actions p90'].rank(pct=True)
+df2["carries_ptile"] = df2['Carries p90'].rank(pct=True)
+df2["take_ons_ptile"] = df2['Take Ons p90'].rank(pct=True)
+df2["PrgR_ptile"] = df2['Progressive Passes Recieved p90'].rank(pct=True)
+
+df2["percentile_grade"] = df2[['sca_ptile', 'carries_ptile', 'take_ons_ptile', 'PrgR_ptile']].mean(axis=1)
+
+
+
+
+#df3 contains the players who remain after using filters
+age_filter = 25
+sca_filter = df2['Shot Creating Actions p90'].quantile(0.6)
+carries_filter = df2['Carries p90'].quantile(0.6)
+take_ons_filter = df2['Take Ons p90'].quantile(0.6)
+PrgR_filter = df2['Progressive Passes Recieved p90'].quantile(0.6)
+n_filter = df2['npxG+xAG p90'].quantile(0.6)
+
+
+df3 = df2[(df2['Age'] <= age_filter) & (df2['npxG+xAG p90'] > n_filter) & (df2['Shot Creating Actions p90'] > sca_filter) & (df2['Carries p90'] > carries_filter) & (df2['Take Ons p90'] > take_ons_filter) & (df2['Progressive Passes Recieved p90'] > PrgR_filter)]
+
+
+df3 = df3.sort_values(by='percentile_grade', ascending=False)
