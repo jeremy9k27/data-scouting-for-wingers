@@ -4,8 +4,9 @@ Using simple data analysis to find a new winger for Tottenham
 
 
 
+**Introduction**
 
-With Ange Postecoglou's arrival at Tottenham, it seemed Spurs would be in the market for a winger to fit Postecoglou's style of play. (At the time of this being written, it appears Spurs are sticking with Heung Min Son and Dejan Kulusevski as the starting wingers.) This project looks to use publicly available data to find a wide creator whose profiles as a ball-to-feet 1v1 dribbler. Postecoglou's in-possesion setup is highly akin to the style of Mikel Arteta and Pep Guardioloa, and Arsenal and Man City wingers like Bukaya Saka and Jack Grealish are perfect examples of the style of winger that would thrive.  
+With Ange Postecoglou's arrival at Tottenham, it seemed Spurs would be in the market for a winger to fit Postecoglou's style of play. (At the time of this being written, it appears Spurs are sticking with Heung Min Son and Dejan Kulusevski as the starting wingers.) This project looks to use publicly available data to find a wide creator whose profiles as a ball-to-feet 1v1 dribbler. Postecoglou's in-possesion setup is highly akin to the style of Mikel Arteta and Pep Guardioloa, and Arsenal and Man City wingers like Bukaya Saka and Jack Grealish are perfect examples of the style of winger that would thrive. With Tottenham likely being in rebuild mode, young age was also prioritized. 
 
 
 
@@ -22,18 +23,17 @@ The type of some of the data was string rather than integers so they needed to b
 
 **Methods**
 
-A second dataframe (df2) was then created to contain only the relevant data from df1. As there is no "winger" position on FBRef, it contained all attackers (players listed as FW, FW-MF, or MF-FW). df2 also included the 4 aftormentioned stats as well as other key information like age, minutes, and npxG+xAG. 
+A second dataframe (df2) was then created to contain only the relevant data from df1. As there is no "winger" position on FBRef, it contained all attackers (players listed as FW, FW-MF, or MF-FW). df2 also included the 4 aftormentioned stats as well as other key information like age, minutes, and npxG+xAG p90. npxG+xA per 90 was used as an additional filter to rule out players who have good skills, but lack end-product contribution. 5 new columns were also added to df2, them being the percentile ranks of each players 4 stats and npxG+xAG p90 within this group of attackers.
+
+The final dataframe (df3) was made by applying filters. Only players above the 60th percentile in in each of the 5 stats and were 25 years old or younger were included. df3 was then ranked in descending order by their average percentile of the 5 stats to obtain a rough ranking of the final players.
 
 **Results**
 
-There were 46 players that remained after the applying the filters. Being 60th percentile in npxG+xA per 90 was used as an additional filter to make the list smaller and to rule out players who have good skills, but lack end-product contribution. The list of players was reduced to 27.
+28 players made the final cut. Many of these players were quite obviously unattainable - Saka, Martinelli, Phil Foden, Rafael Leao, Khvicha Kvaratskhelia, Rodrygo, Vini Jr, Ansu Fati, Ousmane Dembele, Jamal Musiala, and Kylian Mbappe - leaving 17 potential players for Tottenham. (the fact that the likes of Kvaratskhelia and Mbappe were on the list provide a good sanity test for this project.)
 
-Many of these players were quite obviously unattainable - Saka, Martinelli, Phil Foden, Rafael Leao, Khvicha Kvaratskhelia, Rodrygo, Vini Jr, Ansu Fati, Ousmane Dembele, Jamal Musiala, and Kylian Mbappe - leaving 16 potential players for Tottenham. (the fact that the likes of Kvaratskhelia and Mbappe were on the list provide a good sanity test for this project.)
+The final list for Tottenham ranked in descedning order of their average percentile is the following: Edon Zhegrova, Rayan Cherki, Raphina, Jeremy Doku, Donyell Malen, Allan Saint-Maximin, Ademola Lookman, Jadon Sancho, Moussa Diaby, Randal Kolo Muani, Karim Adeyemi, David Pereira da Costa, Justin Kluivert, Dango Ouattara, Antony, and Ferran Torres.
 
-The final list for Tottenham is the following: Jadon Sancho, Allan Saint-Maximin, Kaoru Mitoma, Antony, Ademola Lookman, Ferran Torres, Raphina, Justin Kluivert, Donyell Malen, Randal Kolo Muani, Moussa Diaby, Karim Adeyemi, Edon Zhegrova, Dango Ouattara, Jeremy Doku, and Rayan Cherki.
+Because FBRef had no specific winger position, some of these players are not actually primarily wingers. After removing players whose primary position on Transfermarkt is not either LW or RW, we are left with the final list of potential wingers for Tottenham: **Zhegrova, Raphina, Doku, Malen, ASM, Sancho, Diaby, Adeyemi, Kluivert, Ouattara, Antony, and Torres.**
 
-
-Unless Tottenham choose to sell Harry Kane, many of these players are still probably out of Tottenham's budget, with the realistic options being ASM, Lookman, Kluivert, Malen, Diaby, Adeyemi, Zhergoca, Ouattara, Doku, and Cherki.
-
-
+These players are all of varying degrees of attainability. It is also worth noting that the order of this list is not very significant as the average of the used percentiles does not seem highly meaningful. Teams should also obviously never buy a player based on stats alone without first scouting them. Nevertheless, all of these listed players are worth Tottenham looking at. 
 
