@@ -37,3 +37,7 @@ Because FBRef had no specific winger position, some of these players are not act
 
 These players are all of varying degrees of attainability. It is also worth noting that the order of this list is not very significant as the average of the used percentiles does not seem highly meaningful. Teams should also obviously never buy a player based on stats alone without first scouting them. Nevertheless, all of these listed players are worth Tottenham looking at. 
 
+
+
+**Notes from the future**
+Would you look at that - City bought Doku!
